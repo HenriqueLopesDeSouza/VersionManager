@@ -1,0 +1,14 @@
+# Geral
+.vs/
+.vscode/
+*.log
+
+# .NET
+bin/
+obj/
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+.env
