@@ -16,6 +16,33 @@ O BackEnd é organizado em camadas bem definidas, garantindo baixo acoplamento, 
 
 <img width="279" height="600" alt="image" src="https://github.com/user-attachments/assets/9f616bac-718c-4c16-ab03-99d8b1758821" />
 
+### Princípios e padrões aplicados (BackEnd)
+
+- Clean Architecture
+- Domain-Driven Design (DDD)
+- SOLID
+- Repository Pattern
+- Unit of Work
+- DTOs para isolamento da API
+- Validações centralizadas no domínio
+- Tratamento global de exceções com `ProblemDetails`
+- Paginação padronizada
+
+## Visão Geral da Arquitetura (FrontEnd)
+
+O FrontEnd é uma Single Page Application (SPA) desenvolvida com React + Vite + TypeScript, seguindo princípios de componentização, separação de responsabilidades e comunicação desacoplada com a API.
+A aplicação é buildada em tempo de deploy e servida via Nginx, que também atua como reverse proxy para a API.
+
+### Princípios e padrões aplicados (FrontEnd)
+
+- Single Page Application (SPA)
+- Componentização
+- Separação de responsabilidades
+- Camada dedicada para acesso à API
+- Roteamento por páginas
+- Imutabilidade de estado
+- Configuração de proxy para evitar CORS
+
 ## Regras de Negócio
 
 ### Software
