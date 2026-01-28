@@ -93,16 +93,12 @@ Após a migration inicial:
 docker compose up --build
 ```
 
-URLs do Sistema
+### URLs do Sistema
 
-Frontend:
+* Frontend:
 http://localhost:3000
-
-API:
+* API:
 http://localhost:8080
-
-Swagger:
-http://localhost:8080/swagger
 
 ## Observações Técnicas
 
@@ -110,7 +106,7 @@ http://localhost:8080/swagger
 * A comunicação entre os serviços ocorre via rede interna do Docker.
 * O banco de dados utiliza volume Docker para persistência.
 
-Para resetar completamente o ambiente:
+### Para resetar completamente o ambiente:
 
 ```bash
 docker compose down -v
