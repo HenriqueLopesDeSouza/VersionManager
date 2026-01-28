@@ -67,13 +67,14 @@ Passos
 docker compose up -d sqlserver
 ```
 
-Instalar a ferramenta do EF Core (se necessário):
-
+📌 Primeira execução – Migrations
+Navegue até a pasta do backend (onde está o .sln) e Instale a ferramenta do EF Core (se necessário):
 ```bash
+cd BackEnd
 dotnet tool install --global dotnet-ef
 ```
 
-Executar a migration inicial:
+Executar a migration inicial e criar o banco de dados:
 
 ```bash
 dotnet ef migrations add InitialCreate \
