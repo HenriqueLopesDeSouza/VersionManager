@@ -88,16 +88,37 @@ A aplicação é buildada em tempo de deploy e servida via Nginx, que também at
  - .NET 8 SDK (apenas para a primeira migration)
 
 ⚠️ Primeira Execução (Obrigatório)
+
  Na primeira execução, o banco ainda não existe, portanto é necessário executar manualmente a migration inicial.
 
 1️⃣ Subir o SQL Server
+
  Na raiz do projeto:
  ```bash
 docker compose up -d sqlserver
 ```
 
 2️⃣ Executar as migrations
+
 Entre na pasta do backend (onde está o .sln):
+```bash
+cd BackEnd
+```
+Instale a ferramenta do EF Core (caso ainda não tenha):
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+Crie a migration inicial e atualize o banco:
+```bash
+dotnet ef migrations add InitialCreate \
+  -p src/VersionManager.Infrastructure \
+  -s src/VersionManager.Api
+
+dotnet ef database update \
+  -p src/VersionManager.Infrastructure \
+  -s src/VersionManager.Api
+```
 
 📌 Primeira execução – Migrations
 Navegue até a pasta do backend (onde está o .sln) e Instale a ferramenta do EF Core (se necessário):
