@@ -60,13 +60,6 @@ O BackEnd é organizado em camadas bem definidas, garantindo baixo acoplamento, 
 ⚠️ Migrations – Primeira Execução (IMPORTANTE)
 Na primeira execução, é necessário executar manualmente a migration inicial, pois o banco ainda não existe.
 
-Passos
-- Subir apenas o SQL Server:
-
-```bash
-docker compose up -d sqlserver
-```
-
 📌 Primeira execução – Migrations
 Navegue até a pasta do backend (onde está o .sln) e Instale a ferramenta do EF Core (se necessário):
 ```bash
@@ -84,6 +77,12 @@ dotnet ef migrations add InitialCreate \
 dotnet ef database update \
   -p BackEnd/src/VersionManager.Infrastructure \
   -s BackEnd/src/VersionManager.Api
+```
+
+- Subir apenas o SQL Server:
+
+```bash
+docker compose up -d sqlserver
 ```
 
 ## Subindo toda a stack
