@@ -82,7 +82,7 @@ A aplicação é buildada em tempo de deploy e servida via Nginx, que também at
 - As alterações são persistidas via Unit of Work.
 - Operações inválidas não alteram o estado do sistema.
 
-## Como Executar o Projeto (Passo a Passo)
+## Como Executar o Projeto (Docker)
  Pré-requisitos
  - Docker
  - Docker Compose
