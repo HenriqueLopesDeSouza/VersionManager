@@ -81,14 +81,23 @@ A aplicação é buildada em tempo de deploy e servida via Nginx, que também at
 - As alterações são persistidas via Unit of Work.
 - Operações inválidas não alteram o estado do sistema.
 
-## Como Rodar o Projeto (Docker)
+## Como Executar o Projeto (Passo a Passo)
  Pré-requisitos
  - Docker
  - Docker Compose
  - .NET 8 SDK (apenas para a primeira migration)
 
-⚠️ Migrations – Primeira Execução (IMPORTANTE)
-Na primeira execução, é necessário executar manualmente a migration inicial, pois o banco ainda não existe.
+⚠️ Primeira Execução (Obrigatório)
+ Na primeira execução, o banco ainda não existe, portanto é necessário executar manualmente a migration inicial.
+
+1️⃣ Subir o SQL Server
+ Na raiz do projeto:
+ ```bash
+docker compose up -d sqlserver
+```
+
+2️⃣ Executar as migrations
+Entre na pasta do backend (onde está o .sln):
 
 📌 Primeira execução – Migrations
 Navegue até a pasta do backend (onde está o .sln) e Instale a ferramenta do EF Core (se necessário):
@@ -109,11 +118,7 @@ dotnet ef database update \
   -s BackEnd/src/VersionManager.Api
 ```
 
-- Subir apenas o SQL Server:
 
-```bash
-docker compose up -d sqlserver
-```
 
 ## Subindo toda a stack
 
