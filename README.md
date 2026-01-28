@@ -13,6 +13,7 @@ O projeto segue princípios de Clean Architecture, DDD e boas práticas de desig
 ## Visão Geral da Arquitetura (BackEnd)
 
 O BackEnd é organizado em camadas bem definidas, garantindo baixo acoplamento, alta coesão e facilidade de manutenção.
+
 <img width="279" height="600" alt="image" src="https://github.com/user-attachments/assets/9f616bac-718c-4c16-ab03-99d8b1758821" />
 
 ## Regras de Negócio
