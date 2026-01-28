@@ -8,3 +8,123 @@ Sistema para Gestão de Versões de Software, composto por:
 * Orquestração: Docker Compose
 
 O projeto segue princípios de Clean Architecture, DDD e boas práticas de design de APIs, com foco em organização, manutenibilidade e clareza arquitetural.
+
+# Estrutura do Repositório
+/
+├── BackEnd/
+│   ├── src/
+│   ├── tests/
+│   ├── Dockerfile
+│   └── VersionManager.sln
+├── FrontEnd/
+│   ├── src/
+│   ├── public/
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   └── package.json
+└── docker-compose.yml
+
+## Visão Geral da Arquitetura (BackEnd)
+
+O BackEnd é organizado em camadas bem definidas, garantindo baixo acoplamento, alta coesão e facilidade de manutenção.
+<img width="279" height="600" alt="image" src="https://github.com/user-attachments/assets/9f616bac-718c-4c16-ab03-99d8b1758821" />
+
+## Regras de Negócio
+
+### Software
+
+- O nome do software é obrigatório, normalizado (trim) e deve possuir no mínimo 2 caracteres.
+- Não é permitido cadastrar ou atualizar um software com nome duplicado.
+- A descrição é opcional e armazenada como `null` quando vazia.
+- A data de criação é definida automaticamente em UTC.
+- Para atualização parcial (PATCH), ao menos um campo deve ser informado.
+- Não é possível atualizar ou remover um software inexistente.
+
+---
+
+### Versões de Software
+
+- Versões pertencem obrigatoriamente a um software existente.
+- Não é permitido cadastrar versões duplicadas para o mesmo software.
+- O identificador da versão é obrigatório e normalizado (trim).
+- Cada versão possui:
+  - Número da versão
+  - Data de lançamento
+  - Indicador de descontinuação
+- Ao marcar uma versão como descontinuada, a data de descontinuação é definida automaticamente em UTC.
+- Atualizações parciais exigem ao menos um campo informado.
+- Não é possível remover versões inexistentes.
+
+---
+
+### Regras Gerais
+
+- Todas as validações de negócio são aplicadas no domínio.
+- Violações de regras resultam em `DomainException`.
+- As alterações são persistidas via Unit of Work.
+- Operações inválidas não alteram o estado do sistema.
+
+##Como Rodar o Projeto (Docker)
+ Pré-requisitos
+ - Docker
+ - Docker Compose
+ - .NET 8 SDK (apenas para a primeira migration)
+
+⚠️ Migrations – Primeira Execução (IMPORTANTE)
+Na primeira execução, é necessário executar manualmente a migration inicial, pois o banco ainda não existe.
+
+Passos
+- Subir apenas o SQL Server:
+
+```bash
+docker compose up -d sqlserver
+```
+
+Instalar a ferramenta do EF Core (se necessário):
+
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+Executar a migration inicial:
+
+```bash
+dotnet ef migrations add InitialCreate \
+  -p BackEnd/src/VersionManager.Infrastructure \
+  -s BackEnd/src/VersionManager.Api
+
+dotnet ef database update \
+  -p BackEnd/src/VersionManager.Infrastructure \
+  -s BackEnd/src/VersionManager.Api
+```
+
+## Subindo toda a stack
+
+Após a migration inicial:
+
+```bash
+docker compose up --build
+```
+
+URLs do Sistema
+
+Frontend:
+http://localhost:3000
+
+API:
+http://localhost:8080
+
+Swagger:
+http://localhost:8080/swagger
+
+## Observações Técnicas
+
+* O FrontEnd consome a API através do proxy /api, configurado no Nginx, evitando problemas de CORS.
+* A comunicação entre os serviços ocorre via rede interna do Docker.
+* O banco de dados utiliza volume Docker para persistência.
+
+Para resetar completamente o ambiente:
+
+```bash
+docker compose down -v
+```
