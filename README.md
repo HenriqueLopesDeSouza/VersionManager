@@ -9,20 +9,6 @@ Sistema para Gestão de Versões de Software, composto por:
 
 O projeto segue princípios de Clean Architecture, DDD e boas práticas de design de APIs, com foco em organização, manutenibilidade e clareza arquitetural.
 
-# Estrutura do Repositório
-/
-├── BackEnd/
-│   ├── src/
-│   ├── tests/
-│   ├── Dockerfile
-│   └── VersionManager.sln
-├── FrontEnd/
-│   ├── src/
-│   ├── public/
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   └── package.json
-└── docker-compose.yml
 
 ## Visão Geral da Arquitetura (BackEnd)
 
