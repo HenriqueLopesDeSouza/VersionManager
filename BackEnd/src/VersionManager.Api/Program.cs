@@ -42,8 +42,33 @@ app.UseCors("AllowWeb");
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
+    var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>()
+        .CreateLogger("DbMigration");
+
+    var retries = 10;
+    var delay = TimeSpan.FromSeconds(3);
+
+    for (var attempt = 1; attempt <= retries; attempt++)
+    {
+        try
+        {
+            logger.LogInformation("Applying migrations... attempt {Attempt}/{Retries}", attempt, retries);
+            db.Database.Migrate();
+            logger.LogInformation("Migrations applied successfully.");
+            break;
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Migration attempt {Attempt} failed.", attempt);
+
+            if (attempt == retries)
+                throw;
+
+            Thread.Sleep(delay);
+        }
+    }
 }
+
 
 app.MapControllers();
 app.Run();
