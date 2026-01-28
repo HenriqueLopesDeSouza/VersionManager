@@ -109,15 +109,15 @@ Instale a ferramenta do EF Core (caso ainda não tenha):
 dotnet tool install --global dotnet-ef
 ```
 
+Restaurar NuGet
+```bash
+dotnet restore VersionManager.sln
+```
+
 Crie a migration inicial e atualize o banco:
 ```bash
-dotnet ef migrations add InitialCreate \
-  -p src/VersionManager.Infrastructure \
-  -s src/VersionManager.Api
-
-dotnet ef database update \
-  -p src/VersionManager.Infrastructure \
-  -s src/VersionManager.Api
+dotnet ef migrations add InitialCreate --project src\VersionManager.Infrastructure\VersionManager.Infrastructure.csproj --startup-project src\VersionManager.Api\VersionManager.Api.csproj
+dotnet ef database update --project src\VersionManager.Infrastructure\VersionManager.Infrastructure.csproj --startup-project src\VersionManager.Api\VersionManager.Api.csproj
 ```
 
 3️⃣ Subir toda a stack
