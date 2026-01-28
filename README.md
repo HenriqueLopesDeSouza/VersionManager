@@ -120,34 +120,21 @@ dotnet ef database update \
   -s src/VersionManager.Api
 ```
 
-📌 Primeira execução – Migrations
-Navegue até a pasta do backend (onde está o .sln) e Instale a ferramenta do EF Core (se necessário):
+3️⃣ Subir toda a stack
+
+Volte para a raiz do projeto e execute:
 ```bash
-cd BackEnd
-dotnet tool install --global dotnet-ef
-```
-
-Executar a migration inicial e criar o banco de dados:
-
-```bash
-dotnet ef migrations add InitialCreate \
-  -p BackEnd/src/VersionManager.Infrastructure \
-  -s BackEnd/src/VersionManager.Api
-
-dotnet ef database update \
-  -p BackEnd/src/VersionManager.Infrastructure \
-  -s BackEnd/src/VersionManager.Api
-```
-
-
-
-## Subindo toda a stack
-
-Após a migration inicial:
-
-```bash
+cd ..
 docker compose up --build
 ```
+
+🔁 Próximas Execuções
+
+Após a primeira execução:
+```bash
+docker compose up
+```
+Não é necessário rodar migrations novamente, pois o banco fica persistido no volume Docker.
 
 ### URLs do Sistema
 
