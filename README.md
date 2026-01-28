@@ -86,6 +86,7 @@ A aplicação é buildada em tempo de deploy e servida via Nginx, que também at
  - Docker
  - Docker Compose
 
+acessar a pasta VersionManager e executar
 ```bash
 docker compose up -d --build
 ```
