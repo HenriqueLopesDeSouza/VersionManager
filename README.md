@@ -33,6 +33,9 @@ O BackEnd é organizado em camadas bem definidas, garantindo baixo acoplamento, 
 O FrontEnd é uma Single Page Application (SPA) desenvolvida com React + Vite + TypeScript, seguindo princípios de componentização, separação de responsabilidades e comunicação desacoplada com a API.
 A aplicação é buildada em tempo de deploy e servida via Nginx, que também atua como reverse proxy para a API.
 
+<img width="355" height="599" alt="image" src="https://github.com/user-attachments/assets/e6e53c00-96b8-41a0-a54b-b93f36c99dc9" />
+
+
 ### Princípios e padrões aplicados (FrontEnd)
 
 - Single Page Application (SPA)
