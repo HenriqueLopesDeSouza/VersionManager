@@ -85,56 +85,11 @@ A aplicação é buildada em tempo de deploy e servida via Nginx, que também at
  Pré-requisitos
  - Docker
  - Docker Compose
- - .NET 8 SDK (apenas para a primeira migration)
 
-⚠️ Primeira Execução (Obrigatório)
-
- Na primeira execução, o banco ainda não existe, portanto é necessário executar manualmente a migration inicial.
-
-1️⃣ Subir o SQL Server
-
- Na raiz do projeto:
- ```bash
-docker compose up -d sqlserver
-```
-
-2️⃣ Executar as migrations
-
-Entre na pasta do backend (onde está o .sln):
 ```bash
-cd BackEnd
-```
-Instale a ferramenta do EF Core (caso ainda não tenha):
-```bash
-dotnet tool install --global dotnet-ef
+docker compose up -d --build
 ```
 
-Restaurar NuGet
-```bash
-dotnet restore VersionManager.sln
-```
-
-Crie a migration inicial e atualize o banco:
-```bash
-dotnet ef migrations add InitialCreate --project src\VersionManager.Infrastructure\VersionManager.Infrastructure.csproj --startup-project src\VersionManager.Api\VersionManager.Api.csproj
-dotnet ef database update --project src\VersionManager.Infrastructure\VersionManager.Infrastructure.csproj --startup-project src\VersionManager.Api\VersionManager.Api.csproj
-```
-
-3️⃣ Subir toda a stack
-
-Volte para a raiz do projeto e execute:
-```bash
-cd ..
-docker compose up --build
-```
-
-🔁 Próximas Execuções
-
-Após a primeira execução:
-```bash
-docker compose up
-```
-Não é necessário rodar migrations novamente, pois o banco fica persistido no volume Docker.
 
 ### URLs do Sistema
 
