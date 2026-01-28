@@ -27,6 +27,7 @@ O BackEnd é organizado em camadas bem definidas, garantindo baixo acoplamento, 
 - Validações centralizadas no domínio
 - Tratamento global de exceções com `ProblemDetails`
 - Paginação padronizada
+- xUnit – framework de testes unitários
 
 ## Visão Geral da Arquitetura (FrontEnd)
 
