@@ -51,7 +51,7 @@ O BackEnd é organizado em camadas bem definidas, garantindo baixo acoplamento, 
 - As alterações são persistidas via Unit of Work.
 - Operações inválidas não alteram o estado do sistema.
 
-##Como Rodar o Projeto (Docker)
+## Como Rodar o Projeto (Docker)
  Pré-requisitos
  - Docker
  - Docker Compose
